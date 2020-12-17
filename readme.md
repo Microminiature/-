@@ -1,7 +1,5 @@
 # 基于WiFi控制的LED流水灯
 
-[toc]
-
 本项目源于一次微机原理课程设计，自己在做的时候相关参考资料略少踩了不少坑，完成后开源课程设计供其他有需要的人参考。
 
 ## 一、题目说明分析
@@ -30,7 +28,7 @@
 
 **电路连接图**
 
-![电路](image/circuit.png)
+![电路](https://github.com/Microminiature/MicrocomputerPrincipleCurriculumDesign/blob/main/image/circuit.png)
 
 **软件平台**
 
@@ -41,7 +39,7 @@
 
 ### 1、从浏览器中输入流水灯控制信号            
 
-![webctrl](image/webctrl.png)
+![webctrl](https://github.com/Microminiature/MicrocomputerPrincipleCurriculumDesign/blob/main/image/webctrl.png)
 
 本次课程设计主要利用单片机esp8266建立HTTP服务器，利用esp8266建立WiFi热点，控制设备（可为电脑、手机等）连接esp8266热点，浏览器访问HTTP控制网页进行流水灯的初始状态、流动方向、流动速度的输入。
 
@@ -65,11 +63,11 @@
 
 ### 3、处理控制信号以开始流水灯流动
 
-![led](image/led.png)
+![led](https://github.com/Microminiature/MicrocomputerPrincipleCurriculumDesign/blob/main/image/led.png)
 
 处理上一步写入内存的三个控制信号（初值、流向、速度），使用8255进行流水灯控制。8255的A口连接实验箱上的LED灯D0到D7共8个LED，根据三个控制信号来将初值进行移位显示（左移ROL，右移ROR），速度的决定由显示LED灯值之前加入的延时个数确定，如果速度为0则只显示初值在8个LED上，然后直接跳转到等待下一次串口数据的接收。若速度取到10则加一个延迟，取到1加10个延迟，通过LOOP控制。
 
-本次课设还用到了8255的B口，由于A口只显示8位流水灯未免显得单调，所以在B口同时输出与A口相同的LED灯控制值。不同点是B口的PB0接LED排灯的D15，PB7接LED排灯D8，此时D15~D8显示的是D7~D0的镜像反转（镜像反转的意思是指D7~D0如果向右流动、D15~D8会向左流动。D7~D0位初始状态为01H，则D15~D8初始状态为10H）。
+本次课设还用到了8255的B口，由于A口只显示8位流水灯未免显得单调，所以在B口同时输出与A口相同的LED灯控制值。不同点是B口的PB0接LED排灯的D15，PB7接LED排灯D8，此时D15\~D8显示的是D7\~D0的镜像反转（镜像反转的意思是指D7\~D0如果向右流动、D15~D8会向左流动。D7\~D0位初始状态为01H，则D15\~D8初始状态为10H）。
 
 ## 四、项目构建方法
 
